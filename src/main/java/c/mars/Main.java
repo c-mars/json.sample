@@ -7,8 +7,15 @@ public class Main {
     public static void main(String[] args) {
         String json = new Gson().toJson(new R("ok"));
         System.out.println(json);
-        String repacked = new Gson().toJson(new R(json));
-        System.out.println(repacked);
+        Gson gson = new Gson();
+
+        R r = gson.fromJson(json, R.class);
+        if (r == null) {
+            String repacked = new Gson().toJson(new R(json));
+            System.out.println(repacked);
+        } else {
+            System.out.println("r: "+r.getStatus());
+        }
     }
 
     private static class R {
